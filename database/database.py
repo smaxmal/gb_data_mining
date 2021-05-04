@@ -22,16 +22,6 @@ class Database:
     def _add_comments(self, session, data):
         result = []
         for comment in data:
-            # author = self._get_or_create(
-            #     session,
-            #     models.Author,
-            #     "url",
-            #     name=comment["user"]["full_name"],
-            #     url=comment["user"]["url"],
-            #     id=comment["user"]["id"],
-            # )
-            # del comment['user']
-            # comment_rec = self._get_or_create(session, models.Comment, "id", **comment, author=author)
             comment_rec = self._get_or_create(session, models.Comment, "id", **comment)
             result.append(comment_rec)
             result.extend(self._add_comments(session, comment["replies"]))
